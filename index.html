@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/normal.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="wrap">
+        <h2>MyToDo</h2>
+        <div id="search">
+            <input type="text" class="ipt">
+            <button class="btn">submit</button>
+        </div>
+        <div id="lists">
+            <li>
+                <input type="checkbox" name="" id="ipt">
+                <p class="p0">123</p>
+                <div id="sord">
+                    <span class="specific">详情</span>
+                    <span class="delete">删除</span>
+                </div>
+            </li>
+        </div>
+        <div id="more">
+            <div id="content">
+                <input type="text" class="p_text">
+                <p>备注</p>
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <p>设置闹钟</p>
+                <input type="text">
+                <button>提交</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/store.js"></script>
+    <script>
+        // $('.btn').click(function(){
+        //     var newli='<li>';
+        //         newli=newli+'<input type="checkbox" name="" id="ipt">';
+        //         newli=newli+'<p class="p0">123</p>';
+        //         newli=newli+'<div id="sord">';
+        //         newli=newli+'<span class="specific">详情</span>';
+        //         newli=newli+'<span class="delete">删除</span>';
+        //         newli=newli+'</div>'
+        //         newli=newli+'<div id="more">'+
+        //             '<div id="content">'+
+        //                 '<input type="text" class="p_text">'+
+        //                 '<p>备注</p>'+
+        //                 '<textarea name="" id="" cols="30" rows="10"></textarea>'+
+        //                 '<p>设置闹钟</p>'+
+        //                 '<input type="text">'+
+        //                 '<button>提交</button>'+
+        //             '</div>';
+        //         newli=newli+'</li>';
+        //         $li=$(newli)
+        //         $('#lists').prepend($li)
+        //         $li.find('.p0').html($('#search .ipt').val())
+
+
+        //         $('#lists li').each(function(){
+        //             var $_this=$(this);
+        //             $(this).find('#ipt').click(function(){
+        //                 $(this).siblings().find('#ipt').checked=false;
+        //             })
+        //             $(this).find('.specific').click(function(){
+        //                 if($_this.find('#ipt').is(':checked'))
+        //                 {
+        //                     $('#wrap #lists #more').css("display","block");
+        //                     $('#wrap #lists #more #content .p_text').val($_this.find('.p0').html());
+        //                     $('#wrap #more #content button').click(function(){
+        //                         $_this.find('.p0').html($_this.find('.p_text').val());
+        //                         $('#wrap #lists #more').css("display","none");
+        //                     })
+        //                 }
+        //                 else{
+        //                     alert("请选择要查看的对象")
+        //                 }
+        //             })
+        //             $(this).find('.delete').click(function(){
+        //                 if($_this.find('input').is(':checked'))
+        //                 {
+        //                     var com=confirm("确定要删除该选项吗");
+        //                     if(com){
+        //                         $_this.remove()
+        //                     } else {
+
+        //                     }
+        //                 }
+        //                 else{
+        //                     alert("请选择要删除的对象")
+        //                 }
+        //             })
+        //         })
+        // })
+
+
+        var MyToDo=(function(){
+            //初始化变量
+                var lists=[];
+                var i=0;
+                var $ipt,$btn,$lists;
+            //初始化js对象
+            var jqinit=function(){
+                $ipt=$('#wrap #search .ipt');
+                $btn=$('#wrap #search .btn');
+                $lists=$('#wrap #lists');
+            }
+            var renderInit=function(lists){
+                $lists.html(' ');
+                lists=store.get('lists');
+                console.log(i)
+                for(var x=0;x<=i;x++){
+                    $('#lists').append($(lists[x]));
+                }
+                // 存储新添加的数据
+                store.set('lists',lists);
+            }
+            var submit=function(lists){
+                $btn.click(function(){
+                    var newli='<li>';
+                    newli=newli+'<input type="checkbox" name="" id="ipt">';
+                    newli=newli+'<p class="p0">123</p>';
+                    newli=newli+'<div id="sord">';
+                    newli=newli+'<span class="specific">详情</span>';
+                    newli=newli+'<span class="delete">删除</span>';
+                    newli=newli+'</div>'
+                    newli=newli+'</li>';
+                    $li=$(newli)
+                    $li.find('.p0').html($('#search .ipt').val());
+                    $('#lists').prepend($li);
+                    lists[++i]=$li;
+                    console.log($(lists[i]))
+                    store.set('lists',lists);
+                    renderInit(lists)
+                    del(lists);
+                    spc(lists);
+                }) 
+            }
+            var spc=function(lists){
+                // console.log($('lists li'))
+                // $('#lists li').each(function(){
+                //     console.log(1)
+                // })
+                // $('#lists li').each(function(){
+                //     var $_this=$(this);
+                //     $(this).find('.specific').click(function(){
+                //         if($_this.find('#ipt').is(':checked'))
+                //         {
+                //             $('#wrap #more').css("display","block");
+                //             console.log($_this.find('.p0').html())
+                //             $('#wrap #more #content .p_text').val($_this.find('.p0').html());
+                //             $('#wrap #more #content button').click(function(){
+                //                 $_this.find('.p0').html($_this.find('.p_text').val());
+                //                 $('#wrap #more').css("display","none");
+                //             })
+                //         }
+                //         else{
+                //             alert("请选择要查看的对象")
+                //         }
+                //     })
+                // })
+                for(var j=i;j>=0;j--){
+                    console.log(i)
+                    $(lists[j]).find('.specific').click(function(){
+                        $('#wrap #more').css("display","block");
+                        var $_this=$(this);
+                        $('#wrap #more #content .p_text').val($(this).parent().parent().find('.p0').html());
+                        $('#wrap #more #content button').click(function(){
+                            $_this.parent().parent().find('.p0').html($('#wrap #more #content .p_text').val());
+                            $('#wrap #more').css("display","none");
+                        })
+                    })
+                }
+            }
+            var del=function(lists){
+                // $('#lists li').each(function(){
+                //     console.log(124)
+                //     var $_this=$(this);
+                //     $(this).find('.delete').click(function(){
+                //         if($_this.find('input').is(':checked'))
+                //         {
+                //             var com=confirm("确定要删除该选项吗");
+                //             if(com){
+                //                 $_this.remove()
+                //             } else {
+
+                //             }
+                //         }
+                //         else{
+                //             alert("请选择要删除的对象")
+                //         }
+                //     })
+                // })
+                for(var j=i;j>=0;j--){
+                    console.log(i)
+                    $(lists[j]).find('.delete').click(function(){
+                        var com=confirm("确定要删除该选项吗");
+                        if(com){
+                            $(this).parent().parent().remove();
+                            i--;
+                        } else {
+
+                        }
+                    })
+                }
+            }
+            var Myinit=function(){
+                jqinit();
+                renderInit(lists);
+                submit(lists);
+                
+            }
+            return {
+                Myinit:Myinit
+            }
+        })()
+        $(function(){
+            MyToDo.Myinit();
+        })
+    </script>
+</body>
+</html>

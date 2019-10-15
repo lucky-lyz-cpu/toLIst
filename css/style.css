@@ -1,0 +1,103 @@
+body {
+    background: midnightblue;
+}
+#wrap {
+    width: 660px;
+    margin: 50px auto;
+    border: 1px solid #333;
+    text-align: center;
+}
+#wrap h2 {
+    color: white;
+}
+#wrap #search {
+    overflow: hidden;
+}
+#wrap #search .ipt {
+    width: 580px;
+    height: 30px;
+    border-radius: 5px;
+}
+#wrap #search .btn {
+    width: 70px;
+    margin-left: 0;
+    display: inline-block;
+    height: 36px;
+    background: blue;
+    color: black;
+    border: none;
+    border-radius: 5px;
+}
+li {
+    list-style: none;
+}
+#wrap #lists {
+    width: 660px;
+}
+#wrap #lists li {
+    /* text-align: left; */
+    line-height: 35px;
+    width: 660px;
+    height: 35px;
+    background: white;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+#wrap #lists li>p {
+    float: left;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 1px;
+    height: 10px;
+    width: 200px;
+}
+#wrap #lists li>input {
+    margin-left: 10px;
+    float: left;
+    margin-top: 13px;
+}
+#wrap #lists li #sord {
+    float: right;
+    margin-right: 10px;
+}
+#wrap #lists li #sord span{
+    color: #333;
+    font-size: 16px;
+    margin-left: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#wrap #more {
+    text-align: left;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 310px;
+    background: #333;
+    display: none;
+}
+#wrap #more #content {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+#wrap #more #content p {
+    margin-bottom: 0;
+    color: white;
+}
+#wrap #more #content textarea {
+    height: 100px;
+    width: 280px
+}
+#wrap #more #content input {
+    width: 280px;
+}
+#wrap #more #content button {
+    padding: 5px;
+    background: blue;
+    color: black;
+    border: none;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
